@@ -1,0 +1,31 @@
+body {
+    touch-action: manipulation;
+}
+.form-check label {
+    font-weight: normal;
+    margin-top: auto;
+}
+.btn-huge {
+    --bs-btn-padding-y: 3rem;
+    --bs-btn-padding-x: 3rem;
+    --bs-btn-font-size: 5rem;
+}
+input.input-lg {
+    font-size: xx-large;
+    text-align: center;
+}
+.btn-big {
+    --bs-btn-padding-y: 1rem;
+    --bs-btn-padding-x: 1rem;
+    --bs-btn-font-size: 2rem;
+}
+#qrcode img {
+    display: inline-block !important;
+    margin: 2rem 0rem;
+}
+#modalQRCode img {
+    margin:auto;
+    border: 1rem solid white;
+    max-height:75vh;
+    max-width:75vw;
+}

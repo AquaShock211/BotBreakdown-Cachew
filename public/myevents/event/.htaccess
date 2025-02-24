@@ -1,0 +1,9 @@
+# Enable RewriteEngine
+RewriteEngine On
+
+# Allow requests for existing files and directories to work as usual
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rule to rewrite requests for /{value} to /2025.php?event={value}
+RewriteRule ^([^/]+)(?!\.php)/?$ 2025.php?event=$1 [L,QSA]

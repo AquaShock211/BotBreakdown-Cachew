@@ -1,0 +1,71 @@
+body {
+    min-height: 100vh;
+    position: relative;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.form-label {
+    margin-bottom: 0.1rem;
+}
+
+.form-label.required:after {
+    content: " *";
+    color: "red";
+    font-weight: 100;
+}
+
+i.help-icon {
+    color:blue;
+}
+
+footer#page-footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+
+.nav-link {
+    margin: 0px 1rem;
+}
+
+.totp-digit {
+    width: 3rem;
+    height: 3rem;
+    text-align: center;
+    font-size: 2rem;
+    margin: 0 0.2rem;
+    padding: 0;
+    line-height: 3rem;
+}
+
+.blog-post-meta {
+    font-size: 0.9rem;
+}
+
+ol#faq > li {
+    font-weight: bold;
+    margin-bottom:2rem;
+}
+
+ol#faq ul {
+    font-weight: normal;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-bottom: 175px;
+    }
+    .checkerboard-text {
+        margin-top: -10%;
+    }
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-bottom: 310px;
+    }
+}
