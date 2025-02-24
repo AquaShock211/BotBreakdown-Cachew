@@ -1,5 +1,5 @@
 <?php
-$bbUserAgent = 'BotBreakdown-1.0'
+$bbUserAgent = 'BotBreakdown-1.0';
 include '_connectionStrings.cfg';
 
 // Create connection
