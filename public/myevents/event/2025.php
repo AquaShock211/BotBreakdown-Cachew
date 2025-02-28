@@ -238,6 +238,8 @@ if ( isset($_GET["event"]) ) {
                                     </div>
                                 </div><!-- /.row -->
                                 
+                                <hr class="mt-4 mb-1">
+
                                 <label class="form-label">
                                     Algae Removed
                                     <sup><i class="fa-solid fa-circle-info text-primary" data-bs-toggle="tooltip" data-bs-html="true" title="This is the NUMBER of algae the robot removed from the coral, during the autonomous phase."></i></sup>
@@ -326,14 +328,25 @@ if ( isset($_GET["event"]) ) {
                                         </div>
                                     </div>
                                     <div class="col-sm">
-                                        <label class="form-label">Broken</label>
+                                        <label class="form-label">
+                                            Endgame
+                                            <sup><i class="fa-solid fa-circle-info text-primary" data-bs-toggle="tooltip" data-bs-html="true" title="Where the robot actually ended the match - regardless of whether another ending was attempted."></i></sup>
+                                        </label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="broken-1" name="broken" value="Broken">
-                                            <label class="form-check-label" for="broken-1">Yes</label>
+                                            <input class="form-check-input" type="radio" id="endgame-none" name="endgame" value="None">
+                                            <label class="form-check-label" for="endgame-none">None</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="broken-0" name="broken" value="No">
-                                            <label class="form-check-label" for="broken-0">No</label>
+                                            <input class="form-check-input" type="radio" id="endgame-parked" name="endgame" value="Parked">
+                                            <label class="form-check-label" for="endgame-parked">Parked</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="endgame-shallow" name="endgame" value="Shallow">
+                                            <label class="form-check-label" for="endgame-shallow">Shallow</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="endgame-deep" name="endgame" value="Deep">
+                                            <label class="form-check-label" for="endgame-deep">Deep</label>
                                         </div>
                                     </div>
                                 </div>
@@ -370,24 +383,23 @@ if ( isset($_GET["event"]) ) {
                                 <div class="row">
                                     <div class="col-sm">
                                         <label class="form-label">
-                                            Endgame
-                                            <sup><i class="fa-solid fa-circle-info text-primary" data-bs-toggle="tooltip" data-bs-html="true" title="Where the robot actually ended the match - regardless of whether another ending was attempted."></i></sup>
+                                            Ground Algae Pickup
+                                            <sup><i class="fa-solid fa-circle-info text-primary" data-bs-toggle="tooltip" data-bs-html="true" title="Check the box if the robot makes a controlled algae pickup from the ground."></i></sup>
                                         </label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="endgame-none" name="endgame" value="None">
-                                            <label class="form-check-label" for="endgame-none">None</label>
+                                            <input class="form-check-input" type="checkbox" id="algae-ground" name="algae-ground" value="Yes">
+                                            <label class="form-check-label" for="algae-ground">Yes</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <label class="form-label">Broken</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="broken-1" name="broken" value="Broken">
+                                            <label class="form-check-label" for="broken-1">Yes</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="endgame-parked" name="endgame" value="Parked">
-                                            <label class="form-check-label" for="endgame-parked">Parked</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="endgame-shallow" name="endgame" value="Shallow">
-                                            <label class="form-check-label" for="endgame-shallow">Shallow</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="endgame-deep" name="endgame" value="Deep">
-                                            <label class="form-check-label" for="endgame-deep">Deep</label>
+                                            <input class="form-check-input" type="radio" id="broken-0" name="broken" value="No">
+                                            <label class="form-check-label" for="broken-0">No</label>
                                         </div>
                                     </div>
                                 </div>
@@ -472,6 +484,8 @@ if ( isset($_GET["event"]) ) {
                                         <a class="btn btn-big btn-success form-control" id="L1TeleIncrease" onClick="changeValue($('#L1Tele'),1)">+1</a>
                                     </div>
                                 </div><!-- /.row -->
+
+                                <hr class="mt-4 mb-1">
                                 
                                 <label class="form-label">Algae in Processor <small style="font-weight: normal;">(Count algae, not points)</small></label>
                                 <div class="row">
