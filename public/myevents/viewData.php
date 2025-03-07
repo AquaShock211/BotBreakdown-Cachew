@@ -298,7 +298,7 @@ if (isset($_GET['event'])) {
 
     $dataPointColumns = "";
     $joinColumns = "";
-    echo "<th>Tournament Level</th><th>Match Number</th><th>Team Number</th>";
+    echo "<th>Match Number</th><th>Team Number</th>";
     foreach ($dataPointGetResultData as $dataItem) {
         if (strlen($dataPointColumns) > 0) {
             $dataPointColumns .= ", ";
@@ -343,7 +343,6 @@ if (isset($_GET['event'])) {
 
     $matchGet = $db->prepare("SELECT
                                 tm.`id` AS `teamMatchId`
-                                , tm.`level`
                                 , tm.`match`
                                 , tm.`teamNumber`
                                 , $dataPointColumns
