@@ -533,7 +533,7 @@ if ( isset($_GET["event"]) ) {
                     </div>
                     <div class="col-md-4">
                         <input type="submit" class="btn btn-primary btn-big form-control mt-5 py-3" value="Submit" />
-                        <input class="btn btn-secondary form-control mt-4" type="reset" value="Reset form" onClick="canvas.style.backgroundImage = 'url(\'\')'; coordinates=[]; prevPoint=''; ctx.clearRect(0, 0, canvas.width, canvas.height);" />
+                        <input class="btn btn-secondary form-control mt-4" type="reset" value="Reset form" />
                         <div id="submitError" class="alert alert-warning" style="display: none;"><i class="fa-solid fa-triangle-exclamation fa-3x fa-pull-left"></i>Missing data- please check the event, team, and match. <a href="#" class="btn btn-default btn-sm"><i class="fa-solid fa-turn-up"></i></a></div>
                     </div>
                 </div><!-- /.row -->
@@ -664,6 +664,13 @@ if ( isset($_GET["event"]) ) {
                         canvas.style.backgroundImage = 'url(/assets/images/2025/red-court-500.png)';
                     }
                 }
+            });
+
+            form.addEventListener('reset', (event) => {
+                canvas.style.backgroundImage = 'url("")';
+                coordinates.length = 0;
+                const prevPoint = '';
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
             });
 
             form.addEventListener('submit', (event) => {
