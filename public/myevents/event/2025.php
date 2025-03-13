@@ -143,6 +143,12 @@ if ( isset($_GET["event"]) ) {
                                     Drive Path
                                     <sup><i class="fa-solid fa-circle-info text-primary" data-bs-toggle="tooltip" data-bs-html="true" title="Choose the alliance the team is on. Then click on the map where the robot starts the match.<br>If they move off the line during the autonomous phase, you can click more points to indicate where they drove.<br>Use the undo button to the left if you need to erase one or more points."></i></sup>
                                 </label>
+                                    
+                                <div class="form-check form-check-inline ms-4 ms-xl-5">
+                                    <input class="form-check-input" type="checkbox" id="flip" name="flip">
+                                    <label class="form-check-label" for="flip">Flip</label>
+                                </div>
+
                                 <span class="float-end">
                                     <label class="form-label me-4">Alliance:</label>
                                     <div class="form-check form-check-inline">
@@ -154,7 +160,7 @@ if ( isset($_GET["event"]) ) {
                                         <label class="form-check-label" for="red">Red</label>
                                     </div>
                                 </span>
-                                        <br>
+                                <br>
                                 <canvas id="drawingCanvas" width="500" height="426" style="width: 100%; height: auto; background-image: url(''); background-size: cover;"></canvas>
                             </div>
                             <div class="col-md-5">
@@ -608,9 +614,10 @@ if ( isset($_GET["event"]) ) {
 
             const canvas = document.getElementById('drawingCanvas');
             const ctx = canvas.getContext('2d');
-            const coordinates = [];
+            let coordinates = [];
             const form = document.getElementById('eventForm');
             const coordinatesInput = document.getElementById('coordinatesInput');
+            const flipCheckbox = document.getElementById('flip');
 
             // sets the initial ratio of the canvas
             canvas.width = 500;
@@ -622,8 +629,14 @@ if ( isset($_GET["event"]) ) {
                 // The click coordinates are absolute to the page, so account for where the canvas is on the page to get the click location in the canvas.
                 // The points and lines need to be drawn relative to the native (500px wide) canvas size, even if the HTML is stretching the element.
                 // So to store where the points will be drawn, get the percentage then multiply by the actual current size of the canvas. Crazy.
-                const x = Math.floor(((event.clientX - rect.left) / rect.width) * canvas.width);
-                const y = Math.floor(((event.clientY - rect.top) / rect.height) * canvas.height);
+                let x = Math.floor(((event.clientX - rect.left) / rect.width) * canvas.width);
+                let y = Math.floor(((event.clientY - rect.top) / rect.height) * canvas.height);
+
+                // If the canvas is flipped, rotate the click to where it should show up.
+                if (flipCheckbox.checked) {
+                    x = canvas.width - x;
+                    y = canvas.height - y;
+                }
 
                 coordinates.push({ x: x, y: y });
                 drawPoint(x, y);
@@ -643,6 +656,10 @@ if ( isset($_GET["event"]) ) {
 
             function undoPoint() {
                 coordinates.pop();
+                redrawCanvas();
+            }
+
+            function redrawCanvas() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 coordinates.forEach((coord, index) => {
                     drawPoint(coord.x, coord.y);
@@ -656,18 +673,39 @@ if ( isset($_GET["event"]) ) {
                 });
             }
 
+            function mirrorCoordinates(coords) {
+                return coords.map(coord => ({
+                    x: canvas.width - coord.x,
+                    y: coord.y
+                }));
+                redrawCanvas();
+            }
+
+            flipCheckbox.addEventListener('change', () => {
+                if (flipCheckbox.checked) {
+                    canvas.style.transform = 'rotate(180deg)';
+                } else {
+                    canvas.style.transform = 'rotate(0deg)';
+                }
+            });
+
             form.addEventListener('change', (event) => {
                 if (event.target.name === 'alliance') {
                     if (event.target.value === 'Blue') {
                         canvas.style.backgroundImage = 'url(/assets/images/2025/blue-court-500.png)';
+                        coordinates = mirrorCoordinates(coordinates);
+                        redrawCanvas();
                     } else if (event.target.value === 'Red') {
                         canvas.style.backgroundImage = 'url(/assets/images/2025/red-court-500.png)';
+                        coordinates = mirrorCoordinates(coordinates);
+                        redrawCanvas();
                     }
                 }
             });
 
             form.addEventListener('reset', (event) => {
                 canvas.style.backgroundImage = 'url("")';
+                canvas.style.transform = 'rotate(0deg)';
                 coordinates.length = 0;
                 const prevPoint = '';
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
